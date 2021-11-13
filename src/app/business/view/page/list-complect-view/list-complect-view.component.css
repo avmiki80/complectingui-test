@@ -1,0 +1,23 @@
+.my-table-cell-text {
+  font-size: 12px!important;
+}
+.my-table-cell-name {
+  width: 15%;
+}
+.my-table-cell-shifr {
+  width: 20%;
+}
+.my-table-cell-count {
+  width: 10%;
+}
+.my-table-cell-data {
+  width: 15%;
+}
+.my-table-cell-operations{
+  width: 10% !important;
+  font-size: 12px!important;
+  /*height: 30px;*/
+  /*line-height: 30px;*/
+}
+
+

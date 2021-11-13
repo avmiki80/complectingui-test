@@ -1,0 +1,29 @@
+.error {
+  padding: 5px 0 0 0;
+  font-size: 10px;
+}
+.add-btn {
+  color: #88bb00;
+}
+.input-field {
+  /*margin-right: 20px;*/
+}
+.input-field input{
+  /*height: 10px;*/
+}
+.my-input {
+  width: 250px;
+}
+
+/*.my-test {*/
+/*  width: 30px;*/
+/*}*/
+
+/*убирает стрелочки вверх/вниз для изменения чисел*/
+/*input.my-test::-webkit-outer-spin-button,*/
+/*input.my-test::-webkit-inner-spin-button {*/
+/*  display: none;*/
+/*}*/
+/*input.my-test {*/
+/*  -moz-appearance: textfield;*/
+/*}*/

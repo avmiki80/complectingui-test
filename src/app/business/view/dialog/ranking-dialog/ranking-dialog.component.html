@@ -1,0 +1,74 @@
+<mat-dialog-content [formGroup]="form">
+  <p mat-dialog-title>{{dialogTitle}}</p>
+  <div class="row">
+    <mat-form-field class="my-col" appearance="fill">
+      <mat-label>{{'RANKING.DBDISK' | translate}}</mat-label>
+      <input matInput
+             type="number"
+             placeholder="{{'RANKING.ENTER-DBDISK' | translate}}"
+             min="0"
+             required="required"
+             formControlName="dbDisk"
+             id="dbDisk"
+      >
+      <button *ngIf="getDBDiskield.value > 0"
+              mat-button matSuffix mat-icon-button aria-label="Clear"
+              (click)="getDBDiskield.setValue(0)"
+      >
+        <mat-icon>clear</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+  <div class="row">
+    <mat-form-field class="my-col" appearance="fill">
+      <mat-label>{{'RANKING.ANGLE-DBDISK' | translate}}</mat-label>
+      <input matInput
+             type="number"
+             placeholder="{{'RANKING.ENTER-ANGLE-DBDISK' | translate}}"
+             min="0"
+             max="359"
+             required="required"
+             formControlName="angleDbDisk"
+             id="angleDbDisk"
+      >
+      <button *ngIf="getAngleDBDiskField.value > 0"
+              mat-button matSuffix mat-icon-button aria-label="Clear"
+              (click)="getAngleDBDiskField.setValue(0)"
+      >
+        <mat-icon>clear</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+  <div class="row">
+    <mat-form-field class="my-col" appearance="fill">
+      <mat-label>{{'RANKING.NEED-DB' | translate}}</mat-label>
+      <input matInput
+             type="number"
+             placeholder="{{'RANKING.ENTER-NEED-DB' | translate}}"
+             min="0"
+             required="required"
+             formControlName="needDB"
+             id="needDB"
+      >
+      <button *ngIf="getNeedDBField.value > 0"
+              mat-button matSuffix mat-icon-button aria-label="Clear"
+              (click)="getNeedDBField.setValue(0)"
+      >
+        <mat-icon>clear</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <div class="text-center nopadding">
+    <button mat-raised-button color="primary"
+            (click)="onConfirm()"
+            [disabled]="onCheckFields()"
+    >{{dialogButton}}
+    </button>
+    <button mat-raised-button
+            (click)="onCancel()"
+    >{{'COMMON.CANCEL' | translate}}
+    </button>
+  </div>
+</mat-dialog-actions>

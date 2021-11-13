@@ -1,0 +1,54 @@
+<!--диалоговое окно настроек приложения-->
+<div mat-dialog-content>
+  <mat-tab-group>
+    <mat-tab label="{{'ROTOR.ROTOR' | translate}}" *ngIf="isAdmin">
+      <app-list-rotor-view
+        [onlyView]=false
+        [rotorList]="rotorList"
+        [selectedItem]="selectedRotor"
+        [totalFounded]="totalFoundedRotor"
+        [searchRotor]="searchRotor"
+        [user]="user"
+        (pagingEvent)="pagingRotor($event)"
+        (addRotor)="onAddRotor($event)"
+        (deleteRotor)="onDeleteRotor($event)"
+        (editRotor)="onEditRotor($event)"
+        (searchRotor)="onSearchRotor($event)"
+      ></app-list-rotor-view>
+    </mat-tab>
+    <mat-tab label="{{'BLADE-DSE.BLADE-DSE' | translate}}" *ngIf="isAdmin">
+      <app-list-blade-dse-view
+      [bladeDseList]="bladeDseList"
+      [selectedItem]="selectedBladeDse"
+      [totalFounded]="totalFoundedBladeDse"
+      [searchValues]="searchBladeDse"
+      [user]="user"
+      (pagingEvent)="pagingBladeDse($event)"
+      (addBladeDse)="onAddBladeDse($event)"
+      (deleteBladeDse)="onDeleteBladeDse($event)"
+      (editBladeDse)="onEditBladeDse($event)"
+      (searchBladeDse)="onSearchBladeDse($event)"
+      ></app-list-blade-dse-view>
+    </mat-tab>
+    <mat-tab label="{{'SETTINGS.LANG' | translate}}">
+      <mat-label>{{'LANG.SELECT' | translate}}</mat-label>
+      <mat-radio-group
+        class="radio-group"
+        [(ngModel)]="lang"
+        (ngModelChange)="langChanged()"
+      >
+        <mat-radio-button value="{{en}}">
+          {{'LANG.EN' | translate}}
+        </mat-radio-button>
+
+        <mat-radio-button value="{{ru}}">
+          {{'LANG.RU' | translate}}
+        </mat-radio-button>
+      </mat-radio-group>
+    </mat-tab>
+  </mat-tab-group>
+</div>
+<!--  кнопки возможных действий-->
+<div mat-dialog-actions>
+  <button mat-raised-button color="primary" (click)="close()">{{'COMMON.CLOSE' | translate}}</button>
+</div>

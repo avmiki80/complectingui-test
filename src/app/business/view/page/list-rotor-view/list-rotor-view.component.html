@@ -1,0 +1,144 @@
+<div class="container-fluid">
+  <div class="row">
+    <div [class.col-4]="!onlyView"
+         [class.col-6]="onlyView">
+      <mat-form-field class="my-input" appearance="fill">
+        <mat-label>{{'ROTOR.SEARCH-NAME' | translate}}</mat-label>
+        <input matInput
+               type="text"
+               autocomplete="off"
+               placeholder="{{'ROTOR.ENTER-NAME' | translate}}"
+               #filterInputRotorName
+               [(ngModel)]="searchName"
+               (keydown.escape)="searchName=''; onFilter(null)"
+               (keyup)="onFilter(null)">
+        <button *ngIf="filterInputRotorName.value.trim().length > 0"
+                mat-button matSuffix mat-icon-button aria-lable="Clear"
+                (click)="searchName=''; onFilter(null)">
+          <mat-icon>clear</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+    <div [class.col-4]="!onlyView"
+         [class.col-6]="onlyView">
+      <mat-form-field class="my-input" appearance="fill">
+        <mat-label>{{'ROTOR.SEARCH-SHIFR' | translate}}</mat-label>
+        <input matInput
+               type="text"
+               autocomplete="off"
+               placeholder="{{'ROTOR.ENTER-SHIFR' | translate}}"
+               #filterInputRotorShifr
+               [(ngModel)]="searchShifr"
+               (keydown.escape)="searchShifr=''; onFilter(null)"
+               (keyup)="onFilter(null)">
+        <button *ngIf="filterInputRotorShifr.value.trim().length > 0"
+                mat-button matSuffix mat-icon-button aria-lable="Clear"
+                (click)="searchShifr=''; onFilter(null)">
+          <mat-icon>clear</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+    <div class="col-4" >
+      <button *ngIf="!onlyView"
+              mat-raised-button color="primary"
+              (click)="onClickAddItem()">{{'ROTOR.ADD' | translate}}</button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="card-body table-responsive">
+      <table class="table table-hover" mat-table matSort [dataSource]="dataSource">
+
+        <ng-container matColumnDef="name">
+          <th class="my-table-header-cell-color my-table-cell-text"
+              mat-header-cell *matHeaderCellDef
+              mat-sort-header
+              (click)="onFilter(name)"
+          >{{'ROTOR.NAME' | translate}}</th>
+          <td class="my-table-cell-text"
+              mat-cell *matCellDef="let item"
+              (click)="onClickSelectItem(item)"
+              [class.active]="item === selectedItem"
+          >{{item.name}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="shifr">
+          <th class="my-table-header-cell-color my-table-cell-text"
+              mat-header-cell *matHeaderCellDef
+              mat-sort-header
+              (click)="onFilter(shifr)"
+          >{{'ROTOR.SHIFR' | translate}}</th>
+          <td class="my-table-cell-text"
+              mat-cell *matCellDef="let item"
+              (click)="onClickSelectItem(item)"
+              [class.active]="item === selectedItem"
+          >{{item.shifr.name}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="operation" *ngIf="!onlyView">
+          <th class="my-table-header-cell-color my-table-cell-operations"
+              mat-header-cell *matHeaderCellDef
+          >{{'ROTOR.EDIT-DELETE' | translate}}</th>
+          <td class="my-table-cell-operations"
+              mat-cell *matCellDef="let item"
+              (click) = "onClickSelectItem(item)"
+              [class.active]="item === selectedItem">
+            <button class="edit-icon"
+                    mat-icon-button
+                    (click)="onClickEditItem(item)">
+              <mat-icon aria-hidden="false">edit</mat-icon>
+            </button>
+            <button class="delete-icon"
+                    mat-icon-button
+                    (click)="onClickDeleteItem(item)" >
+              <mat-icon aria-hidden="false">delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="menu" *ngIf="onlyView">
+          <th class="my-table-header-cell-color my-table-cell-operations"
+              mat-header-cell *matHeaderCellDef
+          >{{'ROTOR.SELECT-STAGE' | translate}}</th>
+          <td class="my-table-cell-operations"
+              mat-cell *matCellDef="let item"
+              (click) = "onClickSelectItem(item)"
+              [class.active]="item === selectedItem">
+            <button mat-button
+                    [matMenuTriggerFor]="belowMenu"
+            >{{'STAGE.STAGES-LIST' | translate}} ▼</button>
+            <mat-menu #belowMenu="matMenu" yPosition="below">
+              <button mat-menu-item
+                      *ngFor="let stage of item.stages"
+                      (click)="onClickSelectStage(stage)"
+              >{{stage.bladeDse.shifr.name}}: {{stage.name}}</button>
+            </mat-menu>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row, columns: displayedColumns"></tr>
+      </table>
+      <mat-paginator
+        (page)="pageChanged($event)"
+        [pageIndex]="searchRotor.pageNumber"
+        [pageSize]="searchRotor.pageSize"
+        [length]="totalFounded"
+        [pageSizeOptions]="[5, 10, 20]"
+        showFirstLastButtons>
+      </mat-paginator>
+    </div>
+  </div>
+
+<!--  <div class="row" *ngIf="onlyView">-->
+<!--    <p class="col-6 my-test">{{'STAGE.STAGES-LIST'| translate}}:</p>-->
+<!--    <mat-selection-list class="col-6" *ngIf="selectedItem"-->
+<!--                        [multiple]="false">-->
+<!--      <mat-list-option *ngFor="let stage of this.selectedItem.stages"-->
+<!--                       [value]="stage"-->
+<!--                       (click)="onClickSelectStage(stage)"-->
+<!--                       [class.active]="stage === selectedStage"-->
+<!--      >{{stage.name}}: {{stage.bladeDse.shifr.name}}</mat-list-option>-->
+<!--    </mat-selection-list>-->
+<!--  </div>-->
+</div>
+

@@ -1,0 +1,57 @@
+<mat-dialog-content [formGroup]="form">
+  <p mat-dialog-title>{{dialogTitle}}</p>
+  <div class="row">
+    <mat-form-field class="my-col" appearance="fill">
+      <mat-label>{{'BLADE-DSE.NAME' | translate}}</mat-label>
+      <input matInput
+             type="text"
+             placeholder="{{'BLADE-DSE.ENTER-NAME' | translate}}"
+             maxlength="25"
+             required="required"
+             formControlName="name"
+             id="name"
+      >
+      <button *ngIf="getNameField.value.trim().length > 0"
+              mat-button matSuffix mat-icon-button aria-label="Clear"
+              (click)="getNameField.setValue('')"
+      >
+        <mat-icon>clear</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+  <div class="row">
+    <mat-form-field class="my-col col-7" appearance="fill">
+      <mat-label>{{'BLADE-DSE.SHIFR' | translate}}</mat-label>
+      <input matInput
+             type="text"
+             placeholder="{{'BLADE-DSE.SET-SHIFR' | translate}}"
+             maxlength="25"
+             readonly
+             required="required"
+             (click)="onClickSelectShifr()"
+             formControlName="shifr"
+             id="shifr"
+      >
+      <button *ngIf="getShifrField.value.trim().length > 0"
+              mat-button matSuffix mat-icon-button aria-label="Clear"
+              (click)="getShifrField.setValue('')"
+      >
+        <mat-icon>clear</mat-icon>
+      </button>
+    </mat-form-field>
+    <button class="col-4 shifr-btn" mat-raised-button color="primary" (click)="onClickSelectShifr()">{{'SHIFR.SELECT' | translate}}</button>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <div class="text-center nopadding">
+    <button mat-raised-button color="primary"
+            (click)="onConfirm()"
+            [disabled]="onCheckFields()"
+    >{{dialogAddSaveButton}}
+    </button>
+    <button mat-raised-button
+            (click)="onCancel()"
+    >{{'COMMON.CANCEL' | translate}}
+    </button>
+  </div>
+</mat-dialog-actions>

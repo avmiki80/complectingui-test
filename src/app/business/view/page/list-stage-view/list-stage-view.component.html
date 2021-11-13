@@ -1,0 +1,165 @@
+<div class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-3">
+        <mat-form-field class="my-col" appearance="fill">
+          <mat-label>{{'STAGE.SEARCH-NAME' | translate}}</mat-label>
+          <input matInput
+                 type="text"
+                 placeholder="{{'STAGE.ENTER-NAME' | translate}}"
+                 #filterName
+                 [(ngModel)]="searchName"
+                 (keydown.escape)="searchName=''; onFilter(null)"
+                 (keyup)="onFilter(null)"
+          >
+          <button *ngIf="filterName.value.trim().length > 0"
+                  mat-button matSuffix mat-icon-button aria-lable="Clear"
+                  (click)="searchName=''; onFilter(null)">
+            <mat-icon>clear</mat-icon>
+          </button>
+        </mat-form-field>
+      </div>
+      <div class="col-3">
+        <mat-form-field class="my-col" appearance="fill">
+          <mat-label>{{'STAGE.SEARCH-SHIFR' | translate}}</mat-label>
+          <input matInput
+                 type="text"
+                 placeholder="{{'STAGE.ENTER-SHIFR' | translate}}"
+                 #filterShifr
+                 [(ngModel)]="searchShifr"
+                 (keydown.escape)="searchShifr=''; onFilter(null)"
+                 (keyup)="onFilter(null)"
+          >
+          <button *ngIf="filterShifr.value.trim().length > 0"
+                  mat-button matSuffix mat-icon-button aria-lable="Clear"
+                  (click)="searchShifr=''; onFilter(null)">
+            <mat-icon>clear</mat-icon>
+          </button>
+        </mat-form-field>
+      </div>
+      <div class="col-3">
+        <button mat-raised-button color="primary" (click)="onClickAddItem()">{{'COMMON.ADD' | translate}}</button>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="card-body table-responsive">
+        <table class="table table-hover" mat-table matSort [dataSource]="dataSource">
+
+          <ng-container matColumnDef="name">
+            <th class="my-table-header-cell-color my-table-cell-text col-name"
+                mat-header-cell *matHeaderCellDef
+                mat-sort-header
+            >{{'STAGE.NAME' | translate}}</th>
+            <td class="my-table-cell-text"
+                mat-cell *matCellDef="let item"
+                (click)="onClickSelectItem(item)"
+                [class.active]="item === selectedItem"
+            >{{item.name}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="shifr">
+            <th class="my-table-header-cell-color my-table-cell-text col-shifr"
+                mat-header-cell *matHeaderCellDef
+                mat-sort-header
+            >{{'STAGE.SHIFR' | translate}}</th>
+            <td class="my-table-cell-text"
+                mat-cell *matCellDef="let item"
+                (click)="onClickSelectItem(item)"
+                [class.active]="item === selectedItem"
+            >{{item.bladeDse.shifr.name}}</td>
+          </ng-container>
+          <ng-container matColumnDef="count">
+            <th class="my-table-header-cell-color my-table-cell-text col-tu"
+                mat-header-cell *matHeaderCellDef
+                mat-sort-header
+            >{{'STAGE.COUNT' | translate}}</th>
+            <td class="my-table-cell-text"
+                mat-cell *matCellDef="let item"
+                (click)="onClickSelectItem(item)"
+                [class.active]="item === selectedItem"
+            >{{item.count}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="tuComplect">
+            <th class="my-table-header-cell-color my-table-cell-text col-tu"
+                mat-header-cell *matHeaderCellDef
+                mat-sort-header
+            >{{'STAGE.TU-COMPLECT' | translate}}</th>
+            <td class="my-table-cell-text"
+                mat-cell *matCellDef="let item"
+                (click)="onClickSelectItem(item)"
+                [class.active]="item === selectedItem"
+            >{{item.tuComplect}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="tuOpposite">
+            <th class="my-table-header-cell-color my-table-cell-text col-tu"
+                mat-header-cell *matHeaderCellDef
+                mat-sort-header
+            >{{'STAGE.TU-OPPOSITE' | translate}}</th>
+            <td class="my-table-cell-text"
+                mat-cell *matCellDef="let item"
+                (click)="onClickSelectItem(item)"
+                [class.active]="item === selectedItem"
+            >{{item.tuOpposite}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="tuNeighb">
+            <th class="my-table-header-cell-color my-table-cell-text col-tu"
+                mat-header-cell *matHeaderCellDef
+                mat-sort-header
+            >{{'STAGE.TU-NEIGHB' | translate}}</th>
+            <td class="my-table-cell-text"
+                mat-cell *matCellDef="let item"
+                (click)="onClickSelectItem(item)"
+                [class.active]="item === selectedItem"
+            >{{item.tuNeighb}}</td>
+          </ng-container>
+          <ng-container matColumnDef="reverse">
+            <th class="my-table-header-cell-color my-table-cell-text col-reverse"
+                mat-header-cell *matHeaderCellDef
+            >{{'STAGE.REVERSE' | translate}}</th>
+            <td class="my-table-cell-text"
+                mat-cell *matCellDef="let item"
+                (click)="onClickSelectItem(item)"
+                [class.active]="item === selectedItem"
+            >
+              <mat-checkbox
+
+                (change)="$event ? onToggleReverse(item) : null"
+
+                (click)="$event.stopPropagation()"
+
+                [checked]="item.reverse"
+              >
+              </mat-checkbox>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="operation">
+            <th class="my-table-header-cell-color col-operations"
+                mat-header-cell *matHeaderCellDef
+            ></th>
+            <td mat-cell *matCellDef="let item" [class.active]="item === selectedItem">
+              <button mat-icon-button (click)="onClickEditItem(item)" class="edit-icon">
+                <mat-icon aria-hidden="false">edit</mat-icon>
+              </button>
+              <button mat-icon-button (click)="onClickDeleteItem(item)" class="delete-icon">
+                <mat-icon aria-hidden="false">delete</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row, columns: displayedColumns"></tr>
+        </table>
+        <mat-paginator
+          [pageSizeOptions]="[5, 10, 20]"
+          showFirstLastButtons>
+        </mat-paginator>
+      </div>
+    </div>
+  </div>
+</div>
+
+

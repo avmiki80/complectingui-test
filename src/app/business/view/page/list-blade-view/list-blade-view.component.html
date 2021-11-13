@@ -1,0 +1,199 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-6">
+      <mat-form-field class="my-input" appearance="fill">
+        <mat-label>{{'BLADE.SEARCH-NUMBER' | translate}}</mat-label>
+        <input matInput
+               type="text"
+               autocomplete="off"
+               placeholder="{{'BLADE.ENTER-NUMBER' | translate}}"
+               #filterInputBladeIndNumber
+               [(ngModel)]="searchIndNumber"
+               (keydown.escape)="searchIndNumber=''; onFilter(null)"
+               (keyup)="onFilter(null)">
+        <button *ngIf="filterInputBladeIndNumber.value.trim().length > 0"
+                mat-button matSuffix mat-icon-button aria-lable="Clear"
+                (click)="searchIndNumber=''; onFilter(null)">
+          <mat-icon>clear</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="card-body table-responsive">
+      <table class="table table-hover" mat-table matSort [dataSource]="dataSource">
+
+        <ng-container matColumnDef="indNumber">
+          <th class="my-table-header-cell-color my-table-cell-text my-table-cell-indNumber"
+              mat-header-cell *matHeaderCellDef
+              mat-sort-header
+              (click)="onFilter(indNumber)"
+          >{{'BLADE.IND-NUMBER' | translate}}</th>
+          <td class="my-table-cell-text my-table-cell-indNumber"
+              mat-cell *matCellDef="let item"
+              (click)="onClickSelectItem(item)"
+              [class.active]="item === selectedItem"
+          >{{item.indNumber}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="shifr">
+          <th class="my-table-header-cell-color my-table-cell-text my-table-cell-shifr"
+              mat-header-cell *matHeaderCellDef
+          >{{'BLADE.SHIFR' | translate}}</th>
+          <td class="my-table-cell-text my-table-cell-shifr"
+              mat-cell *matCellDef="let item"
+              (click)="onClickSelectItem(item)"
+              [class.active]="item === selectedItem"
+          >{{item.bladeDse.shifr.name}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="mr">
+          <th class="my-table-header-cell-color my-table-cell-text my-table-cell-data"
+              mat-header-cell *matHeaderCellDef
+              mat-sort-header
+              (click)="onFilter(mr)"
+          >{{'BLADE.MR' | translate}}</th>
+          <td class="my-table-cell-text my-table-cell-data"
+              mat-cell *matCellDef="let item"
+              (click)="onClickSelectItem(item)"
+              [class.active]="item === selectedItem"
+          >{{item.data.mr}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="mx">
+          <th class="my-table-header-cell-color my-table-cell-text my-table-cell-data"
+              mat-header-cell *matHeaderCellDef
+              mat-sort-header
+              (click)="onFilter(mx)"
+          >{{'BLADE.MX' | translate}}</th>
+          <td class="my-table-cell-text my-table-cell-data"
+              mat-cell *matCellDef="let item"
+              (click)="onClickSelectItem(item)"
+              [class.active]="item === selectedItem"
+          >{{item.data.mx}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="my">
+          <th class="my-table-header-cell-color my-table-cell-text my-table-cell-data"
+              mat-header-cell *matHeaderCellDef
+              mat-sort-header
+              (click)="onFilter(my)"
+          >{{'BLADE.MY' | translate}}</th>
+          <td class="my-table-cell-text my-table-cell-data"
+              mat-cell *matCellDef="let item"
+              (click)="onClickSelectItem(item)"
+              [class.active]="item === selectedItem"
+          >{{item.data.my}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="mz">
+          <th class="my-table-header-cell-color my-table-cell-text my-table-cell-data"
+              mat-header-cell *matHeaderCellDef
+              mat-sort-header
+              (click)="onFilter(mz)"
+          >{{'BLADE.MZ' | translate}}</th>
+          <td class="my-table-cell-text my-table-cell-data"
+              mat-cell *matCellDef="let item"
+              (click)="onClickSelectItem(item)"
+              [class.active]="item === selectedItem"
+          >{{item.data.mz}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="exclude" *ngIf="viewType">
+          <th class="my-table-header-cell-color my-table-cell-text my-table-cell-exclude"
+              mat-header-cell *matHeaderCellDef
+          >{{'BLADE.EXCLUDE-FROM-COMPLECTING' | translate}}</th>
+          <td class="my-table-cell-text my-table-cell-exclude"
+              mat-cell *matCellDef="let item"
+              (click)="onClickSelectItem(item)"
+              [class.active]="item === selectedItem">
+            <mat-checkbox
+              (change)="$event ? onToggleExclude(item) : null"
+              (click)="$event.stopPropagation()"
+              [checked]="item.excluded"
+              (click)="onClickSelectItem(item)"
+              [class.active]="item === selectedItem">
+            </mat-checkbox>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="operation" *ngIf="viewType">
+          <th class="my-table-header-cell-color my-table-cell-operations"
+              mat-header-cell *matHeaderCellDef
+          >{{'BLADE.EDIT-DELETE' | translate}}</th>
+          <td class="my-table-cell-operations"
+              mat-cell *matCellDef="let item"
+              (click) = "onClickSelectItem(item)"
+              [class.active]="item === selectedItem">
+            <button class="edit-icon"
+                    mat-icon-button
+                    (click)="onClickEditItem(item)">
+              <mat-icon aria-hidden="false">edit</mat-icon>
+            </button>
+            <button class="delete-icon"
+                    mat-icon-button
+                    (click)="onClickDeleteItem(item)" >
+              <mat-icon aria-hidden="false">delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="paz" *ngIf="!viewType">
+          <th class="my-table-header-cell-color my-table-cell-text my-table-cell-paz"
+              mat-header-cell *matHeaderCellDef
+          >{{'BLADE.BIND-FIX-PAZ' | translate}}</th>
+          <td class="my-table-cell-text my-table-cell-paz"
+              mat-cell *matCellDef="let item"
+              (click)="onClickSelectItem(item)"
+              [class.active]="item === selectedItem"
+              [ngClass]="{green: item.fixPaz != 0}">
+            <div class="row">
+<!--в FireFox'e input отображается коряво, поэтому обернули чек и инпут в дивы-->
+              <div class="col-4">
+                <mat-checkbox
+                  (change)="$event ? onSelectFixPaz(item) : null"
+                  (click)="$event.stopPropagation()"
+                  [checked]="selection.isSelected(item)"
+                  (click)="onClickSelectItem(item)"
+                  [class.active]="item === selectedItem">
+                </mat-checkbox>
+              </div>
+              <div class="col-8">
+                <input [class.my-table-cell-fix-paz]="item.fixPaz.length == 0"
+                       matInput
+                       maxlength="3"
+                       placeholder="{{'BLADE.ENTER-FIX-PAZ' | translate}}"
+                       required="required"
+                       [(ngModel)]="item.fixPaz"
+                       [disabled]="!selection.isSelected(item)"
+                       (change)="onChangeFixPaz(item)"
+                       (click)="onClickSelectItem(item)"
+                       [class.active]="item === selectedItem">
+              </div>
+            </div>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row, columns: displayedColumns"></tr>
+      </table>
+      <mat-paginator *ngIf="viewType"
+        (page)="pageChanged($event)"
+        [pageIndex]="searchBlade.pageNumber"
+        [pageSize]="searchBlade.pageSize"
+        [length]="totalFounded"
+        [pageSizeOptions]="[5, 10, 20]"
+        showFirstLastButtons>
+      </mat-paginator>
+      <mat-paginator
+        *ngIf="!viewType"
+        [pageSizeOptions]="[10, 20, 50, 100]"
+        [pageSize]="5"
+        showFirstLastButtons>
+      </mat-paginator>
+    </div>
+  </div>
+</div>
+
+

@@ -1,0 +1,146 @@
+<mat-dialog-content [formGroup]="form" class="dialog-content">
+  <p mat-dialog-title>{{dialogTitle}}</p>
+  <div class="row">
+    <mat-form-field class="my-col" appearance="fill">
+      <mat-label>{{'STAGE.NAME' | translate}}</mat-label>
+      <input matInput
+             type="text"
+             placeholder="{{'STAGE.ENTER-NAME' | translate}}"
+             maxlength="25"
+             required="required"
+             formControlName="name"
+             id="name"
+      >
+      <button *ngIf="getNameField.value.trim().length > 0"
+              mat-button matSuffix mat-icon-button aria-label="Clear"
+              (click)="getNameField.setValue('')"
+      >
+        <mat-icon>clear</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+  <div class="row">
+    <mat-form-field class="my-col" appearance="fill">
+      <mat-label>{{'STAGE.COUNT' | translate}}</mat-label>
+      <input matInput
+             type="number"
+             placeholder="{{'STAGE.ENTER-COUNT' | translate}}"
+             min="1"
+             required="required"
+             formControlName="count"
+             id="count"
+      >
+      <button *ngIf="getCountField.value > 0"
+              mat-button matSuffix mat-icon-button aria-label="Clear"
+              (click)="getCountField.setValue(0)"
+      >
+        <mat-icon>clear</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+  <div class="row">
+    <mat-form-field class="my-col" appearance="fill">
+      <mat-label>{{'STAGE.TU-COMPLECT' | translate}}</mat-label>
+      <input matInput
+             type="number"
+             placeholder="{{'STAGE.TU-COMPLECT' | translate}}"
+             min="1"
+             required="required"
+             formControlName="tuComplect"
+             id="tuComplect"
+      >
+      <button *ngIf="getTuComplectField.value > 0"
+              mat-button matSuffix mat-icon-button aria-label="Clear"
+              (click)="getTuComplectField.setValue(0)"
+      >
+        <mat-icon>clear</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+  <div class="row">
+    <mat-form-field class="my-col" appearance="fill">
+      <mat-label>{{'STAGE.TU-OPPOSITE' | translate}}</mat-label>
+      <input matInput
+             type="number"
+             placeholder="{{'STAGE.TU-OPPOSITE' | translate}}"
+             min="1"
+             required="required"
+             formControlName="tuOpposite"
+             id="tuOpposite"
+      >
+      <button *ngIf="getTuOppositeField.value > 0"
+              mat-button matSuffix mat-icon-button aria-label="Clear"
+              (click)="getTuOppositeField.setValue(0)"
+      >
+        <mat-icon>clear</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+  <div class="row">
+    <mat-form-field class="my-col" appearance="fill">
+      <mat-label>{{'STAGE.TU-NEIGHB' | translate}}</mat-label>
+      <input matInput
+             type="number"
+             placeholder="{{'STAGE.TU-NEIGHB' | translate}}"
+             min="1"
+             required="required"
+             formControlName="tuNeighb"
+             id="tuNeighb"
+      >
+      <button *ngIf="getTuNeighbField.value > 0"
+              mat-button matSuffix mat-icon-button aria-label="Clear"
+              (click)="getTuNeighbField.setValue(0)"
+      >
+        <mat-icon>clear</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+  <div class="row">
+    <mat-form-field class="my-col col-7" appearance="fill">
+      <mat-label>{{'STAGE.SHIFR' | translate}}</mat-label>
+      <input matInput
+             type="text"
+             placeholder="{{'STAGE.SET-SHIFR' | translate}}"
+             maxlength="25"
+             readonly
+             required="required"
+             (click)="onClickSelectBladeDse()"
+             formControlName="shifr"
+             id="shifr"
+      >
+      <button *ngIf="getShifrField.value.trim().length > 0"
+              mat-button matSuffix mat-icon-button aria-label="Clear"
+              (click)="getShifrField.setValue('')"
+      >
+        <mat-icon>clear</mat-icon>
+      </button>
+    </mat-form-field>
+    <button class="col-4 shifr-btn" mat-raised-button color="primary" (click)="onClickSelectBladeDse()">{{'STAGE.SELECT' | translate}}</button>
+  </div>
+  <div class="row">
+    <mat-label class="col-6">
+      {{'STAGE.REVERSE' | translate}}
+    </mat-label>
+    <mat-checkbox
+      class="col-3"
+      (change)="$event ? onToggleReverse() : null"
+      (click)="$event.stopPropagation()"
+      [checked]="reverse"
+    >
+    </mat-checkbox>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <div class="text-center nopadding">
+    <button mat-raised-button color="primary"
+            (click)="onConfirm()"
+            [disabled]="onCheckFields()"
+    >{{dialogAddSaveButton}}
+    </button>
+    <button mat-raised-button
+            (click)="onCancel()"
+    >{{'COMMON.CANCEL' | translate}}
+    </button>
+  </div>
+</mat-dialog-actions>
+

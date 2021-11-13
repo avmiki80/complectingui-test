@@ -1,0 +1,22 @@
+<h1 mat-dialog-title *ngIf="dialogTitle">{{dialogTitle}}</h1>
+<div mat-dialog-content>
+  <app-list-shifr-view
+    [user]="user"
+    [shifrList]="shifrList"
+    [searchValues]="search"
+    [totalFounded]="totalFounded"
+    [selectedItem]="selectedShifr"
+    (selectShifr)="onSelectShifr($event)"
+    (editShifr)="onEditShifr($event)"
+    (deleteShifr)="onDeleteShifr($event)"
+    (addShifr)="onAddShifr($event)"
+    (pagingEvent)="paging($event)"
+    (searchShifr)="onSearchShifr($event)"
+  >
+  </app-list-shifr-view>
+</div>
+<div mat-dialog-actions>
+  <div class="col-md-5 col-12">
+    <button mat-raised-button (click)="onCancel()">{{'COMMON.CANCEL' | translate}}</button>
+  </div>
+</div>

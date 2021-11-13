@@ -1,0 +1,33 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import "~bootstrap-css-only/css/bootstrap.min.css";
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.delete-icon{
+  color: #ea6561!important;
+}
+.edit-icon{
+  color: #9a9a9a!important;
+}
+.active {
+  background-color: #cffca1 !important;
+}
+
+.my-table-header-cell-color {
+  background-color: #cca6ee !important;
+}
+.my-input {
+  width: 100%;
+}
+.my-table-cell-text {
+  font-size: 16px;
+  text-align: left!important;
+  vertical-align: middle!important;
+}
+.my-table-cell-operations {
+  width: 20%;
+  font-size: 16px;
+  text-align: center!important;
+  vertical-align: middle!important;
+}

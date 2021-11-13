@@ -1,0 +1,84 @@
+<div class="container-fluid">
+  <header>
+    <app-header
+      [user]="user"
+      (langChange)="onChangLanguage($event)"
+    ></app-header>
+  </header>
+  <mat-tab-group
+    [selectedIndex]="selectedTab.value"
+    (selectedIndexChange)="selectedTab.setValue($event)"
+  >
+    <mat-tab label="{{'ROTOR.ROTOR' | translate}}">
+      <div class="container-fluid">
+        <div class="row">
+          <app-list-rotor-view class="col-6"
+                               [onlyView]=true
+                               [searchRotor]="searchRotor"
+                               [totalFounded]="totalFoundedRotor"
+                               [selectedItem]="selectedRotor"
+                               [rotorList]="rotorList"
+                               (searchRotor)="onSearchRotor($event)"
+                               (selectStage)="onSelectStage($event)"
+                               (pagingEvent)="pagingRotor($event)"
+          >
+          </app-list-rotor-view>
+          <app-list-blade-view class="col-6"
+                               [viewType]=true
+                               [user]="user"
+                               [bladeList]="bladeList"
+                               [totalFounded]="totalFoundedBlade"
+                               [searchBlade]="searchBlade"
+                               [selectedItem]="selectedBlade"
+                               (selectBlade)="onSelectBlade($event)"
+                               (searchBlade)="onSearchBlade($event)"
+                               (editBlade)="onUpdateBlade($event)"
+                               (deleteBlade)="onDeleteBlade($event)"
+                               (pagingEvent)="pagingBlade($event)"
+          >
+          </app-list-blade-view>
+        </div>
+      </div>
+    </mat-tab>
+    <mat-tab label="{{'COMPLECT.COMPLECTS' | translate}}">
+      <div class="container-fluid">
+        <div class="row">
+          <app-list-complect-view
+            class="col-6"
+            [selectedItem]="selectedComplect"
+            [searchComplect]="searchComplect"
+            [complectList]="complectList"
+            [totalFounded]="totalFoundedComplect"
+            (searchComplect)="onSearchComplect($event)"
+            (selectComplect)="onSelectComplect($event)"
+            (deleteComplect)="onUncomplect($event)"
+            (ranking)="onDoRanking($event)"
+            (pagingEvent)="pagingComplect($event)"
+          >
+          </app-list-complect-view>
+          <app-list-blade-view
+            class="col-6"
+            [viewType]=false
+            [bladeList]="complecBladeList"
+            [totalFounded]="totalFoundedComplectBlade"
+            [searchBlade]="searchComplectBlade"
+            (editBlade)="onUpdateComplectBlade($event)"
+          >
+          </app-list-blade-view>
+        </div>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+  <div class="row" *ngIf="selectedTab.value == 0">
+    <app-action-button
+      [enableDoComplect]="enableDoComplect"
+      [shifrForComplect]="shifrForComplect"
+      (importFile)="onImportFile($event)"
+      (doComplect)="onDoComplect($event)"
+    >
+    </app-action-button>
+  </div>
+  <footer>
+    <app-footer></app-footer>
+  </footer>
+</div>

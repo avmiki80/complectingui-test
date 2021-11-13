@@ -1,0 +1,167 @@
+<mat-dialog-content [formGroup]="form" class="dialog-content">
+  <p mat-dialog-title>{{dialogTitle}}</p>
+  <div class="row">
+    <mat-form-field class="my-col" appearance="fill">
+      <mat-label>{{'BLADE.IND-NUMBER' | translate}}</mat-label>
+      <input matInput
+             type="text"
+             placeholder="{{'BLADE.ENTER-NUMBER' | translate}}"
+             maxlength="25"
+             required="required"
+             formControlName="name"
+             id="name"
+      >
+      <button *ngIf="getNameField.value.trim().length > 0"
+              mat-button matSuffix mat-icon-button aria-label="Clear"
+              (click)="getNameField.setValue('')"
+      >
+        <mat-icon>clear</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+  <div class="row">
+    <mat-form-field class="my-col" appearance="fill">
+      <mat-label>{{'BLADE.MR' | translate}}</mat-label>
+      <input matInput
+             type="number"
+             placeholder="{{'BLADE.ENTER-MR' | translate}}"
+             required="required"
+             formControlName="mr"
+             id="mr"
+      >
+      <button *ngIf="getMrField.value != 0"
+              mat-button matSuffix mat-icon-button aria-label="Clear"
+              (click)="getMrField.setValue(0)"
+      >
+        <mat-icon>clear</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+  <div class="row">
+    <mat-form-field class="my-col" appearance="fill">
+      <mat-label>{{'BLADE.MX' | translate}}</mat-label>
+      <input matInput
+             type="number"
+             placeholder="{{'BLADE.ENTER-MX' | translate}}"
+             required="required"
+             formControlName="mx"
+             id="mx"
+      >
+      <button *ngIf="getMxField.value != 0"
+              mat-button matSuffix mat-icon-button aria-label="Clear"
+              (click)="getMxField.setValue(0)"
+      >
+        <mat-icon>clear</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+  <div class="row">
+    <mat-form-field class="my-col" appearance="fill">
+      <mat-label>{{'BLADE.MY' | translate}}</mat-label>
+      <input matInput
+             type="number"
+             placeholder="{{'BLADE.ENTER-MY' | translate}}"
+             required="required"
+             formControlName="my"
+             id="my"
+      >
+      <button *ngIf="getMyField.value != 0"
+              mat-button matSuffix mat-icon-button aria-label="Clear"
+              (click)="getMyField.setValue(0)"
+      >
+        <mat-icon>clear</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+  <div class="row">
+    <mat-form-field class="my-col" appearance="fill">
+      <mat-label>{{'BLADE.MZ' | translate}}</mat-label>
+      <input matInput
+             type="number"
+             placeholder="{{'BLADE.ENTER-MZ' | translate}}"
+             required="required"
+             formControlName="mz"
+             id="mz"
+      >
+      <button *ngIf="getMzField.value != 0"
+              mat-button matSuffix mat-icon-button aria-label="Clear"
+              (click)="getMzField.setValue(0)"
+      >
+        <mat-icon>clear</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+  <div class="row">
+    <mat-form-field class="my-col" appearance="fill">
+      <mat-label>{{'BLADE.STELAG' | translate}}</mat-label>
+      <input matInput
+             type="text"
+             placeholder="{{'BLADE.ENTER-STELAG' | translate}}"
+             maxlength="25"
+             required="required"
+             formControlName="stelag"
+             id="stelag"
+      >
+      <button *ngIf="getStelagField.value.trim().length > 0"
+              mat-button matSuffix mat-icon-button aria-label="Clear"
+              (click)="getStelagField.setValue('')"
+      >
+        <mat-icon>clear</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+  <div class="row">
+    <mat-form-field class="my-col" appearance="fill">
+      <mat-label>{{'BLADE.CELL' | translate}}</mat-label>
+      <input matInput
+             type="text"
+             placeholder="{{'BLADE.ENTER-CELL' | translate}}"
+             maxlength="25"
+             required="required"
+             formControlName="cell"
+             id="cell"
+      >
+      <button *ngIf="getCellField.value.trim().length > 0"
+              mat-button matSuffix mat-icon-button aria-label="Clear"
+              (click)="getCellField.setValue('')"
+      >
+        <mat-icon>clear</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+  <div class="row">
+    <mat-form-field class="my-col col-7" appearance="fill">
+      <mat-label>{{'BLADE.SHIFR' | translate}}</mat-label>
+      <input matInput
+             type="text"
+             placeholder="{{'BLADE.SET-SHIFR' | translate}}"
+             maxlength="25"
+             readonly
+             required="required"
+             (click)="onClickSelectBladeDse()"
+             formControlName="shifr"
+             id="shifr"
+      >
+      <button *ngIf="getShifrField.value.trim().length > 0"
+              mat-button matSuffix mat-icon-button aria-label="Clear"
+              (click)="getShifrField.setValue('')"
+      >
+        <mat-icon>clear</mat-icon>
+      </button>
+    </mat-form-field>
+    <button class="col-4 shifr-btn " mat-raised-button color="primary" (click)="onClickSelectBladeDse()">{{'BLADE.SET-SHIFR' | translate}}</button>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <div class="text-center">
+    <button mat-raised-button color="primary"
+            (click)="onConfirm()"
+            [disabled]="onCheckFields()"
+    >{{dialogAddSaveButton}}
+    </button>
+    <button mat-raised-button
+            (click)="onCancel()"
+    >{{'COMMON.CANCEL' | translate}}
+    </button>
+  </div>
+</mat-dialog-actions>

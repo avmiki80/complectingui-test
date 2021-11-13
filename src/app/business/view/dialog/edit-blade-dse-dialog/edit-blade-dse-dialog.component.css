@@ -1,0 +1,24 @@
+.error {
+  padding: 5px 0 0 0;
+  font-size: 10px;
+}
+.add-btn {
+  color: #88bb00;
+}
+.input-field {
+  /*margin-right: 20px;*/
+}
+.input-field input{
+  /*height: 10px;*/
+}
+.my-col {
+  padding: 0 10px 0 15px;
+  width: 100%;
+}
+.shifr-btn {
+  margin-bottom: 22px;
+  margin-left: 25px;
+}
+.dialog-content {
+  max-height: 90vh!important;
+}

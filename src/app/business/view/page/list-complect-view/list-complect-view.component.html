@@ -1,0 +1,167 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-6">
+      <mat-form-field class="my-input" appearance="fill">
+        <mat-label>{{'COMPLECT.SEARCH-NAME' | translate}}</mat-label>
+        <input matInput
+               type="text"
+               autocomplete="off"
+               placeholder="{{'COMPLECT.ENTER-NAME' | translate}}"
+               #filterInputComplectName
+               [(ngModel)]="searchName"
+               (keydown.escape)="searchName=''; onFilter(null)"
+               (keyup)="onFilter(null)">
+        <button *ngIf="filterInputComplectName.value.trim().length > 0"
+                mat-button matSuffix mat-icon-button aria-lable="Clear"
+                (click)="searchName=''; onFilter(null)">
+          <mat-icon>clear</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+    <div class="col-6">
+      <mat-form-field class="my-input" appearance="fill">
+        <mat-label>{{'COMPLECT.SEARCH-SHIFR' | translate}}</mat-label>
+        <input matInput
+               type="text"
+               autocomplete="off"
+               placeholder="{{'COMPLECT.ENTER-SHIFR' | translate}}"
+               #filterInputComplectShifr
+               [(ngModel)]="searchShifr"
+               (keydown.escape)="searchShifr=''; onFilter(null)"
+               (keyup)="onFilter(null)"
+        >
+        <button *ngIf="filterInputComplectShifr.value.trim().length > 0"
+                mat-button matSuffix mat-icon-button aria-lable="Clear"
+                (click)="searchShifr=''; onFilter(null)">
+          <mat-icon>clear</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="card-body table-responsive">
+      <table class="table table-hover" mat-table matSort [dataSource]="dataSource">
+
+        <ng-container matColumnDef="name">
+          <th class="my-table-header-cell-color my-table-cell-text my-table-cell-name"
+              mat-header-cell *matHeaderCellDef
+              mat-sort-header
+              (click)="onFilter(name)"
+          >{{'COMPLECT.NAME' | translate}}</th>
+          <td class="my-table-cell-text my-table-cell-name"
+              mat-cell *matCellDef="let item"
+              (click)="onClickSelectItem(item)"
+              [class.active]="item === selectedItem"
+          >{{item.name}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="shifr">
+          <th class="my-table-header-cell-color my-table-cell-text my-table-cell-shifr"
+              mat-header-cell *matHeaderCellDef
+              mat-sort-header
+              (click)="onFilter(shifr)"
+          >{{'COMPLECT.SHIFR' | translate}}</th>
+          <td class="my-table-cell-text my-table-cell-shifr"
+              mat-cell *matCellDef="let item"
+              (click)="onClickSelectItem(item)"
+              [class.active]="item === selectedItem"
+          >{{item.stage.bladeDse.shifr.name}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="count">
+          <th class="my-table-header-cell-color my-table-cell-text my-table-cell-count"
+              mat-header-cell *matHeaderCellDef
+          >{{'COMPLECT.COUNT' | translate}}</th>
+          <td class="my-table-cell-text my-table-cell-count"
+              mat-cell *matCellDef="let item"
+              (click)="onClickSelectItem(item)"
+              [class.active]="item === selectedItem"
+          >{{item.stage.count}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="tuComplect">
+          <th class="my-table-header-cell-color my-table-cell-text my-table-cell-data"
+              mat-header-cell *matHeaderCellDef
+          >{{'COMPLECT.TU-COMPLECT' | translate}}</th>
+          <td class="my-table-cell-text my-table-cell-data"
+              mat-cell *matCellDef="let item"
+              (click)="onClickSelectItem(item)"
+              [class.active]="item === selectedItem"
+          >{{item.stage.tuComplect}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="tuNeighb">
+          <th class="my-table-header-cell-color my-table-cell-text my-table-cell-data"
+              mat-header-cell *matHeaderCellDef
+          >{{'COMPLECT.TU-NEIGHB' | translate}}</th>
+          <td class="my-table-cell-text my-table-cell-data"
+              mat-cell *matCellDef="let item"
+              (click)="onClickSelectItem(item)"
+              [class.active]="item === selectedItem"
+          >{{item.stage.tuNeighb}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="tuOpposite">
+          <th class="my-table-header-cell-color my-table-cell-text my-table-cell-data"
+              mat-header-cell *matHeaderCellDef
+          >{{'COMPLECT.TU-OPPOSITE' | translate}}</th>
+          <td class="my-table-cell-text my-table-cell-data"
+              mat-cell *matCellDef="let item"
+              (click)="onClickSelectItem(item)"
+              [class.active]="item === selectedItem"
+          >{{item.stage.tuOpposite}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="operation">
+          <th class="my-table-header-cell-color my-table-cell-operations"
+              mat-header-cell *matHeaderCellDef
+          >{{'COMMON.DELETE' | translate}}</th>
+          <td class="my-table-cell-operations"
+              mat-cell *matCellDef="let item"
+              (click) = "onClickSelectItem(item)"
+              [class.active]="item === selectedItem">
+            <button class="delete-icon"
+                    mat-icon-button
+                    (click)="onClickDeleteItem(item)" >
+              <mat-icon aria-hidden="false">delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="ranking">
+          <th class="my-table-header-cell-color my-table-cell-operations"
+              mat-header-cell *matHeaderCellDef
+          >{{'COMPLECT.SELECT-SCHEME' | translate}}</th>
+          <td class="my-table-cell-operations"
+              mat-cell *matCellDef="let item"
+              (click)="onClickSelectItem(item)"
+              [class.active]="item === selectedItem">
+            <button mat-button
+                    (click)="onClickCreateSchema()"
+                    [matMenuTriggerFor]="belowMenu"
+            >{{'COMPLECT.SCHEMES-LIST' | translate}} ▼</button>
+            <mat-menu #belowMenu="matMenu" yPosition="below">
+              <button mat-menu-item
+                      mat-menu-item *ngFor="let rank of schema"
+                      (click)="onClickRanking(rank.ranking)"
+              > {{rank.name}}</button>
+            </mat-menu>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row, columns: displayedColumns"></tr>
+      </table>
+      <mat-paginator
+        (page)="pageChanged($event)"
+        [pageIndex]="searchComplect.pageNumber"
+        [pageSize]="searchComplect.pageSize"
+        [length]="totalFounded"
+        [pageSizeOptions]="[5, 10, 20]"
+        showFirstLastButtons>
+      </mat-paginator>
+    </div>
+  </div>
+</div>
+

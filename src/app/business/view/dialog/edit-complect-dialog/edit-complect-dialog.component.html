@@ -1,0 +1,58 @@
+<!--<mat-dialog-content [formGroup]="form">-->
+<mat-dialog-content>
+  <p mat-dialog-title>{{dialogTitle}}</p>
+  <label>{{'COMPLECT.NAME' | translate}}</label>
+  <div class="row">
+<!--    <mat-form-field class="my-col" appearance="fill">-->
+<!--      <mat-label>{{'COMPLECT.NAME' | translate}}</mat-label>-->
+<!--      <input matInput-->
+<!--             type="text"-->
+<!--             autocomplete="off"-->
+<!--             placeholder="{{'COMPLECT.ENTER-NAME' | translate}}"-->
+<!--             maxlength="25"-->
+<!--             required="required"-->
+<!--             formControlName="name"-->
+<!--             id="name"-->
+<!--      >-->
+<!--      <button *ngIf="getNameField.value.trim().length > 0"-->
+<!--              mat-button matSuffix mat-icon-button aria-label="Clear"-->
+<!--              (click)="getNameField.setValue('')"-->
+<!--      >-->
+<!--        <mat-icon>clear</mat-icon>-->
+<!--      </button>-->
+<!--    </mat-form-field>-->
+
+    <mat-form-field class="my-input" appearance="fill" floatLabel="always">
+      <input matInput
+             type="text"
+             autocomplete="off"
+             placeholder="01"
+             maxlength="2"
+             required="required"
+             #filterInputComplectNameInput
+             [(ngModel)]="complectNameInput"
+             (paste)="false"
+             (keydown)="onFilter($event)">
+      <button *ngIf="filterInputComplectNameInput.value.trim().length > 0"
+              mat-button matSuffix mat-icon-button aria-label="Clear"
+              (click)="complectNameInput='';">
+        <mat-icon>clear</mat-icon>
+      </button>
+      <span matPrefix>{{complectNamePrefix}}</span>
+      <mat-hint align="end">{{'COMPLECT.VALUE' | translate}}</mat-hint>
+    </mat-form-field>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <div class="text-center nopadding">
+    <button mat-raised-button color="primary"
+            (click)="onConfirm()"
+            [disabled]="onCheckFields()"
+    >{{dialogAddSaveButton}}
+    </button>
+    <button mat-raised-button
+            (click)="onCancel()"
+    >{{'COMMON.CANCEL' | translate}}
+    </button>
+  </div>
+</mat-dialog-actions>

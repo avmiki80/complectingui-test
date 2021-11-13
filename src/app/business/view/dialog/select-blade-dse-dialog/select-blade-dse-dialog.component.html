@@ -1,0 +1,22 @@
+<h1 mat-dialog-title *ngIf="dialogTitle">{{dialogTitle}}</h1>
+<div mat-dialog-content>
+  <app-list-blade-dse-view
+    [user]="user"
+    [bladeDseList]="bladeDseList"
+    [searchValues]="search"
+    [totalFounded]="totalFounded"
+    [selectedItem]="selectedBladeDse"
+    (selectBladeDse)="onSelectBladeDse($event)"
+    (editBladeDse)="onEditBladeDse($event)"
+    (deleteBladeDse)="onDeleteBladeDse($event)"
+    (addBladeDse)="onAddBladeDse($event)"
+    (pagingEvent)="paging($event)"
+    (searchBladeDse)="onSearchBladeDse($event)"
+  >
+  </app-list-blade-dse-view>
+</div>
+<div mat-dialog-actions>
+  <div class="col-md-5 col-12">
+    <button mat-raised-button (click)="onCancel()">{{'COMMON.CANCEL' | translate}}</button>
+  </div>
+</div>

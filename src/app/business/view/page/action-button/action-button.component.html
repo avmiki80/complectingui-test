@@ -1,0 +1,24 @@
+<div class="row">
+  <div class="col-6">
+    <div class="upload-btn">
+      <input
+        accept=".xls"
+        style="display: none"
+        #fileInput
+        type="file" (change)="onClickImport($event)" >
+      <button class="btn-primary btn"
+              type="button"
+              (click)="fileInput.click()"
+      >{{'IMPORT.IMPORT' | translate}}</button>
+    </div>
+  </div>
+  <div class="col-6">
+    <button mat-raised-button
+            color="primary"
+            (click)="onClickComplect()"
+            [disabled]="!enableDoComplect"
+    >{{'COMPLECT.COMPLECTING' | translate}}</button>
+  </div>
+
+</div>
+

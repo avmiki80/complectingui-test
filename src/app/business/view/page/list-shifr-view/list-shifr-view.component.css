@@ -1,0 +1,29 @@
+.active {
+  background-color: #cffca1 !important;
+  /*box-shadow: 0 4px 20px 0 rgb(0 0 0 / 14%), 0 7px 10px rgb(156 39 176 / 40%);*/
+}
+.item {
+  font-size: 12px;
+  /*max-height: 40px;*/
+}
+.col-title {
+  width: 80%;
+  text-align: left;
+  vertical-align: middle!important;
+}
+.col-operations{
+  vertical-align: middle!important;
+  width: 20%;
+  height: 30px;
+  line-height: 30px;
+}
+.my-table-header-cell-color {
+  background-color: #cca6ee !important;
+}
+.my-table-cell-text {
+  /*width: 80%;*/
+  vertical-align: middle!important;
+}
+.my-col {
+  width: 100%;
+}
